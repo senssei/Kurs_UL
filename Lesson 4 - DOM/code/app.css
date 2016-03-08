@@ -1,16 +1,7 @@
-.ok {
+.valid {
 	color: green;
 }
 
-.bad {
+.invalid {
 	color: red;
-	text-decoration: underline;
-}
-
-.medium {
-	color: orange;
-}
-
-.weight span, .height span {
-	font-weight: bold;
 }
