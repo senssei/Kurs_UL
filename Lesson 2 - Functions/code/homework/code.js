@@ -1,48 +1,83 @@
-(function (global) {
-	var mapArray;
+(function(global) {
+    var mapArray;
 
-	if (!global.UAM) {
-		global.UAM = {};
-	}
-    
+    if (!global.UAM) {
+        global.UAM = {};
+    }
+
     global.UAM.aircrafts = [];
-    
+
     //////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////// Sample aircraft with sample service  /////////////// 
-    
-    global.UAM.aircrafts.push({
-        code: 'SP-ABC',
-        services: []
-    });
-    
-    global.UAM.aircrafts[0].services.push({
-        name: 'smth1',
-        timeToExecute: 120
-    });
-    
+
+    // global.UAM.aircrafts.push({
+    //     code: 'SP-ABC',
+    //     services: []
+    // });
+
+    // global.UAM.aircrafts[0].services.push({
+    //     name: 'smth1',
+    //     timeToExecute: 120
+    // });
+
     //////////////////////////////////////////////////////////////////////////////////////
 
-    global.UAM.addAircraft = function (newAircraftCode) {
+    global.UAM.addAircraft = function(newAircraftCode) {
         // function should return new aircraft object
+        var obj = {
+            code: newAircraftCode,
+            services: []
+        };
+
+        global.UAM.aircrafts.push(obj);
+
+        return obj;
+
     };
 
-    global.UAM.removeAircraft = function (aircraftObj) {
+    global.UAM.removeAircraft = function(aircraftObj) {
         // !!!
+        global.UAM.aircrafts = global.UAM.aircrafts.filter(function(elem) {
+            return elem !== aircraftObj;
+        });
     };
 
     global.UAM.addWorkToAircraft = function(aircraftObj, name, timeToExxecute) {
         // !!!
-    };
-        
-    global.UAM.reduceTimeToExecute = function(time) {
-        // !!!
-    };
-    
-    global.UAM.getAircraftsForRepairs = function(maxTimeToExecute) {
-        // !!!
+        global.UAM.aircrafts[global.UAM.aircrafts.indexOf(aircraftObj)].services.push({
+            name: name,
+            timeToExecute: timeToExxecute
+        });
     };
 
-}(window));
+    global.UAM.reduceTimeToExecute = function(aircraftObj, time) {
+        // !!!
+        if (!aircraftObj.services) { return; }
+
+        aircraftObj.services.forEach(function(elem) {
+            elem.timeToExecute -= time;
+        });
+    };
+
+    global.UAM.getAircraftsForRepairs = function(maxTimeToExecute) {
+        // !!!
+        var forRepairs = [];
+
+        global.UAM.aircrafts.forEach(function(ari) {
+            if (!ari.services) { return; }
+            
+            ari.services.find(function(serv) {
+                if (serv.timeToExecute <= maxTimeToExecute) {
+                    forRepairs.push(ari);
+                    return serv;
+                }
+            });
+        });
+
+        return forRepairs;
+    };
+
+} (window));
 
 /*
 
