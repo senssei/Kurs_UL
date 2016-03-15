@@ -1,4 +1,4 @@
-(function() {
+window.addEventListener('DOMContentLoaded', function () {
 
     //Create area and ship as `div` in `document` node
     var playArea = {}, // ??
@@ -110,7 +110,7 @@
 
     loop();
 
-})();
+});
 
 // Resources
 // https://developer.mozilla.org/pl/docs/Web/API/Document/createElement
