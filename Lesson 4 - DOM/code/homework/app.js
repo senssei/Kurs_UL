@@ -1,8 +1,8 @@
 window.addEventListener('DOMContentLoaded', function () {
 
     //Create area and ship as `div` in `document` node
-    var playArea = {}, // ??
-        ship = {}; // ??
+    var playArea = document.createElement('div');
+    var ship = document.createElement('div');
 
     var key = {
         right: false,
@@ -21,13 +21,14 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Add player area and ship element at the end of `document.body` element
 
-    // ??
-    // ??
+    document.body.appendChild(playArea);
+    document.body.appendChild(ship);
+
 
     // Add CSS classes accordingly ( player -> player, playArea -> playArea)
 
-    // ??
-    // ??
+    ship.classList.add("ship");
+    playArea.classList.add("playArea");
 
     //move mechanics
     shipPos.x = (playArea.offsetWidth / 2 + playArea.offsetLeft) - (ship.offsetWidth / 2);
@@ -99,8 +100,8 @@ window.addEventListener('DOMContentLoaded', function () {
     // add event listeners observers for both `keydown` and `keyup` events
     // using 'keydown' and 'keyup' functions provided above
 
-    // ??
-    // ??
+    document.addEventListener('keyup',keyUp, false);
+    document.addEventListener('keydown', keyDown, false);
 
     // Main game loop
     function loop() {
